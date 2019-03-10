@@ -32,7 +32,7 @@ var comprssImage = (e) => {
                     var ImageReader = new FileReader()
                     ImageReader.onload = function(){
                         var buffer = new Buffer(ImageReader.result)
-                        fs.writeFile(imageName+'.jpg', buffer, {}, (err, res) => {
+                        fs.writeFile(imageName.split('.').slice(0, -1).join('.')+'.jpg', buffer, {}, (err, res) => {
                             if(err){
                                 console.error(err)
                                 return
