@@ -127,3 +127,11 @@ form {
   border-radius: 1rem;
   cursor: pointer;
 }
+.range-label{
+  text-align: center;
+}
+#quality-value{
+  font-size: 20px;
+  font-family: Courier New;
+  font-weight: bold;
+}

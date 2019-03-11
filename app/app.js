@@ -1,8 +1,19 @@
 'use strict';
 var fs = require('fs');
-const {dialog} = require('electron').remote;
+
+const qualityVal = document.getElementById('quality');
+const qualitySpan = document.getElementById('quality-value');
+
+// setup defailt value for quality
+qualitySpan.innerHTML  = 90;
+qualityVal.value = 90;
+
 document.getElementById("file").addEventListener("change", function (event) {
 	comprssImage(event);
+}); 
+
+document.getElementById("quality").addEventListener("change", function (event) {
+    qualitySpan.innerHTML  = event.target.value;
 }); 
 
 var comprssImage = (e) => {
@@ -11,7 +22,7 @@ var comprssImage = (e) => {
     const imageName = e.target.files[0].name;
     const reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]); 
-    
+
     reader.onload = event => {
         const img = new Image();
         img.src = event.target.result;
