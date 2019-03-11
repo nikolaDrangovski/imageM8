@@ -6,6 +6,7 @@ document.getElementById("file").addEventListener("change", function (event) {
 }); 
 
 var comprssImage = (e) => {
+    console.log("to sto e toa ea")
     const width = 800;  // default val maintain aspect ratio? 
     const height = 450;  // def val, allow user to loc or unlock ratio and setup values
     const imageName = e.target.files[0].name;
