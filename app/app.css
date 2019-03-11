@@ -1,0 +1,69 @@
+  body {
+    font-family: "Open sans", "Segoe UI", "Segoe WP", Helvetica, Arial, sans-serif;
+    color: rgb(131, 144, 157);
+    background: rgb(240, 244, 244);
+    }
+  h1, h2 {
+    margin-bottom: 5px;
+    font-weight: normal;
+    text-align: center;
+    color:#aaa;
+  }
+  h2 {
+    margin: 5px 0 2em;
+    color: #1ABC9C;
+  }
+  form {
+    width: 250px;
+    margin: 0 auto;
+    text-align:center;
+  }
+  
+
+  .file-container {
+    position: relative;
+    width: 250px;
+  } 
+   .input-file-trigger {
+    display: block;
+    padding: 14px 45px;
+    background: #39D2B4;
+    color: #fff;
+    font-size: 1em;
+    transition: all .4s;
+    cursor: pointer;
+  }
+   .input-file {
+    position: absolute;
+    top: 0; left: 0;
+    width: 225px;
+    opacity: 0;
+    padding: 14px 0;
+    cursor: pointer;
+  }
+   .input-file:hover + .input-file-trigger,
+   .input-file:focus + .input-file-trigger,
+   .input-file-trigger:hover,
+   .input-file-trigger:focus {
+    background: rgb(41, 58, 75);
+    color: #39D2B4;
+  }
+  
+  .file-return {
+    margin: 0;
+  }
+  .file-return:not(:empty) {
+    margin: 1em 0;
+  }
+   .file-return {
+    font-style: italic;
+    font-size: .9em;
+    font-weight: bold;
+  }
+   .file-return:not(:empty):before {
+    content: "Selected file: ";
+    font-style: normal;
+    font-weight: normal;
+  }
+  
+  
