@@ -2,17 +2,17 @@
 var fs = require('fs');
 
 const qualityVal = document.getElementById('quality');
-const qualitySpan = document.getElementById('quality-value');
+const qualitySpan = document.getElementById('quality-span');
 
 // setup defailt value for quality
 qualitySpan.innerHTML  = 90;
 qualityVal.value = 90;
 
-document.getElementById("file").addEventListener("change", function (event) {
-	comprssImage(event);
+document.getElementById("file").addEventListener("change", (event) => {
+        comprssImage(event);
 }); 
 
-document.getElementById("quality").addEventListener("change", function (event) {
+document.getElementById("quality").addEventListener("change", (event) => {
     qualitySpan.innerHTML  = event.target.value;
 }); 
 
@@ -40,7 +40,7 @@ var comprssImage = (e) => {
                     console.log(err);
                }); */
 
-               ctx.canvas.toBlob((blob) => {
+                ctx.canvas.toBlob((blob) => {
                     var ImageReader = new FileReader()
                     ImageReader.onload = function(){
                         var buffer = new Buffer.from(ImageReader.result)
