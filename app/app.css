@@ -14,15 +14,15 @@
     color: #1ABC9C;
   }
   form {
-    width: 250px;
+    width: 288px;
     margin: 0 auto;
-    text-align:center;
   }
   
 
   .file-container {
     position: relative;
-    width: 250px;
+    width: 288px;
+    text-align: center;
   } 
    .input-file-trigger {
     display: block;
@@ -36,7 +36,7 @@
    .input-file {
     position: absolute;
     top: 0; left: 0;
-    width: 225px;
+    width: 288px;
     opacity: 0;
     padding: 14px 0;
     cursor: pointer;
@@ -45,7 +45,7 @@
    .input-file:focus + .input-file-trigger,
    .input-file-trigger:hover,
    .input-file-trigger:focus {
-    background: rgb(41, 58, 75);
+    background: rgb(48, 69, 89);
     color: #39D2B4;
   }
   
@@ -66,4 +66,65 @@
     font-weight: normal;
   }
   
-  
+  /*
+  .reg-input{
+    width: 245px;
+    height: 30px;
+  }
+  .reg-input::-webkit-input-placeholder {
+    text-align: center;
+    font-family: "Open sans"
+ } */
+ 
+ .reg-input {
+  height: 3em;
+  width: 18em;
+  border: none;
+  border-left:  #39D2B4 solid 8em;
+  background: #f9f9f9;
+  color: #111;
+  transition: 100ms ease-out all;
+  display: block;
+  position: relative;
+}
+
+.reg-input:focus {
+  outline: none;
+  border-left: rgb(48, 69, 89)  3em solid;
+  background: #fff;
+  transition: 100ms ease-out all;
+}
+
+.reg-input + label {
+  position: relative;
+  top: -2.9em;
+  left: 2.2em;
+  font-size: 11px;
+  color: #eee;
+}
+
+.reg-input:focus + label {
+  left: -20em;
+}
+
+.reg-inputs-container{
+ padding-top: 20px;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 288px;
+  height: 0.25rem;
+  outline: none;
+  border-radius: 0.25rem;
+  background-color: #39D2B4;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color:white;
+  border: 0.25rem solid  #39D2B4;
+  border-radius: 1rem;
+  cursor: pointer;
+}

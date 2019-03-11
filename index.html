@@ -25,11 +25,19 @@
         <label tabindex="0" for="my-file" class="input-file-trigger">Choose an image</label>
       </div> 
       <p class="file-return"></p>
-      <input id="width" type="tenumberxt"> 
-      <input id="height" type="number">
-      <input id="quality" type="range" min="0" max="100" value="80" class="slider" />
+      <div class='reg-inputs-container'> 
+
+      <input id='width'type="number" class='reg-input' name="width" title="width">
+      <label for="width">Width - px</label>   
+  
+      <input id="height" class='reg-input' name="height" title="height" type="number">
+      <label for="height">Height - px</label>   
+    </div>
+    <input id="quality" type="range" min="0" max="100" value="80" class="slider" >
+      
     </form>
     
+ 
   
    <!--  <button id='open'>Open</button> -->
 

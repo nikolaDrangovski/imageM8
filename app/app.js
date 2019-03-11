@@ -11,6 +11,7 @@ var comprssImage = (e) => {
     const imageName = e.target.files[0].name;
     const reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]); 
+    
     reader.onload = event => {
         const img = new Image();
         img.src = event.target.result;
