@@ -8,8 +8,8 @@ let mainWindow
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1080,
-    height: 720,
+    width: 400,
+    height: 500,
     webPreferences: {
       nodeIntegration: true
     }
@@ -22,7 +22,7 @@ function createWindow () {
   // client.create(mainWindow);
   
   // open devtools
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 

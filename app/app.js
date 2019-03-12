@@ -15,7 +15,7 @@ const qualitySpan = document.getElementById('quality-span');
 const widthField =  document.getElementById('width');
 const heightField =  document.getElementById('height');
 const type =  document.getElementById('type');
-const forcePngField =  document.getElementById('type');
+const forcePngField =  document.getElementById('forcePng');
 let folderPath = null;
 // set initial values  
 qualitySpan.innerHTML  = 90;
@@ -37,13 +37,13 @@ document.getElementById("file").addEventListener("change", (event) => {
 }); 
 document.getElementById('chooseStorageFolder').addEventListener('click', _ => {
     dialog.showOpenDialog({ properties: ['openDirectory','createDirectory'] }, (folder) => {
-         console.log(folder)
+        
          folderPath = folder[0];
     })
   })
 
 document.getElementById("quality").addEventListener("input", (event) => {
-    console.log(folderPath)
+    console.log(forcePngField.checked)
     qualitySpan.innerHTML  = event.target.value;
 }); 
 
@@ -118,7 +118,7 @@ var ctxToBlob = (ctx,file,quality) => {
             //  file.type.split('/').pop()
             let originalFileName = file.path.split('/').pop();
             let originalFileExt = originalFileName.split('.').pop();
-            let originalFilePathAndName = file.path.split('.').shift()
+            let originalFilePathAndName = file.path.split('.').shift();
             let path =  originalFilePathAndName + "_imagem8" +'.'+ originalFileExt;
             if(folderPath != null && folderPath +'/'+ file.name != file.path){
                 path = folderPath +'/'+ file.name;
