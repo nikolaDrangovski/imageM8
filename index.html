@@ -8,7 +8,7 @@
   </head>
   <body>
       <script>require('electron-connect').client.create()</script>
-    <h1>Welcome to ImageM8!</h1>
+    <div class='logo-container'> <h1>Welcome to <span class='image-logo'>Image</span><span class='m8'>M8</span></h1> </div>
     <!--   
     We are using Node.js <script>document.write(process.versions.node)</script>,
     Chromium <script>document.write(process.versions.chrome)</script>,
@@ -21,17 +21,28 @@
      -->
      <form action="#">
       <div class="file-container">  
-        <input class="input-file"  id="file" type="file" accept="image/*"> 
+        <input multiple="multiple" class="input-file"  id="file" type="file" accept="image/*"> 
         <label tabindex="0" for="my-file" class="input-file-trigger">Choose an image</label>
       </div> 
       <p class="file-return"></p>
       <div class='reg-inputs-container'> 
+        
+           <select class='reg-select' id='type' onchange="aspectRatioChange(event)" >
+              <option value="original">Original</option>
+              <option value="custom">Custom</option>
+              <option value="height">Height</option>
+              <option value="width">Width</option>
+            </select>
+            <label class='reg-select-label' for="width">Ratio</label>  
 
+      <!-- <input onchange="aspectRatioChange('width',event)"  class='reg-checkbox-width' id='lockWidth' type="checkbox" /> -->
       <input id='width'type="number" class='reg-input' name="width" title="width">
       <label for="width">Width - px</label>   
   
+      <!--<input onchange="aspectRatioChange('height')" class='reg-checkbox-height' id='lockHeight' type="checkbox" />--> 
       <input id="height" class='reg-input' name="height" title="height" type="number">
       <label for="height">Height - px</label>   
+
     </div>
      <div class='range-label'>  Quality <span id='quality-span'></span> </div>
      <input id="quality" type="range" name="quality" title="quality" min="0" max="100" value="80" class="slider" >

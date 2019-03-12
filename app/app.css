@@ -80,11 +80,32 @@ form {
   width: 18em;
   border: none;
   border-left:  #39D2B4 solid 8em;
-  background: #f9f9f9;
+  background:white;
   color: #111;
   transition: 100ms ease-out all;
   display: block;
   position: relative;
+}
+.reg-select{
+  height: 3em;
+  width: 26em;
+  border: none;
+  border-left:  #39D2B4 solid 8em;
+  background:white;
+  color: #111;
+  transition: 100ms ease-out all;
+  display: block;
+  position: relative;
+}
+.reg-select:focus{
+  border-left: rgb(48, 69, 89)  5em solid
+}
+
+.reg-select-label{
+  position: relative;
+  top: -25px;
+  left: 5px;
+  color: white;
 }
 
 .reg-input:focus {
@@ -95,11 +116,21 @@ form {
 }
 
 .reg-input + label {
+  /*
   position: relative;
   top: -2.9em;
   left: 2.2em;
   font-size: 11px;
   color: #eee;
+  */
+
+    top: -25px;
+    left: 5px;
+    position: relative;
+    /* top: -2.9em; */
+    /* left: 2.2em; */
+    /* font-size: 11px; */
+    color: white;
 }
 
 .reg-input:focus + label {
@@ -134,4 +165,34 @@ form {
   font-size: 20px;
   font-family: Courier New;
   font-weight: bold;
+}
+.reg-checkbox-width{
+  position: relative;
+    top: 26px;
+    left: -20px;
+}
+.reg-checkbox-height{
+  position: relative;
+  top: 26px;
+  left: -97px;
+}
+input:disabled{
+  background-color: rgb(193, 193, 193);
+}
+.image-logo{
+  margin-right: 2px;
+  font-size: 25px;
+  color: #868686;
+  font-family: "Lucida Console", Monaco, monospace;
+}
+.m8{
+  font-size: 30px;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-weight: bold;
+  color: #39d2b4;
+}
+.logo-container{
+  max-width: 288px;
+  padding-bottom: 10px;
+  margin: 0 auto;
 }
