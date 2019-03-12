@@ -98,7 +98,7 @@ var comprssImage = (file,data) => {
                   // code block
             }
         },
-            reader.onerror = error => console.log(error);
+            reader.onerror = error => alert(error);
     };
 }
 
@@ -119,8 +119,7 @@ var ctxToBlob = (ctx,file,quality) => {
                    alert(err)
                     return
                 }
-                alert("saved")
-               // shell.openItem(basepath);
+              shell.openItem(path.substring(0, path.lastIndexOf("/") + 1));
             })
         }
         ImageReader.readAsArrayBuffer(blob);
