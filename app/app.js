@@ -3,11 +3,7 @@ const fs = require('fs');
 const { shell } = require('electron'); // deconstructing assignment
 const { dialog } = require('electron').remote
 const { remote } = require('electron');
-const { app } = remote;
  
-
-const basepath = app.getAppPath();
-console.log(basepath)
 
 
 const qualityVal = document.getElementById('quality');
@@ -37,7 +33,6 @@ document.getElementById("file").addEventListener("change", (event) => {
 }); 
 document.getElementById('chooseStorageFolder').addEventListener('click', _ => {
     dialog.showOpenDialog({ properties: ['openDirectory','createDirectory'] }, (folder) => {
-        
          folderPath = folder[0];
     })
   })
@@ -57,20 +52,18 @@ var comprssImage = (file,data) => {
         const img = new Image();
         img.src = event.target.result;
         img.onload = () => {
-            // const width = 600;
             const elem = document.createElement('canvas');
             let scaleFactor = 1;
             let ctx = elem.getContext('2d');
             let height = img.height;
             let width = img.width;
-            // probably could be done with better logic
+             
             switch(data.type) {
                 case 'original':
                     width = img.width;
                     height = img.height;
                     elem.width = width;
                     elem.height = height;
-                    ctx = elem.getContext('2d');
                     ctx.drawImage(img, 0, 0, width, height);
                     ctxToBlob(ctx,file,data.quality) 
                 break;
@@ -79,7 +72,6 @@ var comprssImage = (file,data) => {
                     height = data.height;
                     elem.width = width;
                     elem.height = height;
-                    ctx = elem.getContext('2d');
                     ctx.drawImage(img, 0, 0, width, height);
                     ctxToBlob(ctx,file,data.quality) 
                 break;
@@ -87,8 +79,7 @@ var comprssImage = (file,data) => {
                     height = data.height;
                     scaleFactor = height / img.height;
                     elem.width = img.width * scaleFactor;
-                    elem.height = height //img.height * scaleFactor;
-                    ctx = elem.getContext('2d');
+                    elem.height = height
                     ctx.drawImage(img, 0, 0, img.width * scaleFactor, height);
                     ctxToBlob(ctx,file,data.quality) 
                 break;
@@ -97,12 +88,13 @@ var comprssImage = (file,data) => {
                     scaleFactor = width / img.width;
                     elem.width = width
                     elem.height =  img.height * scaleFactor;
-                    ctx = elem.getContext('2d');
                     ctx.drawImage(img, 0, 0, width, img.height * scaleFactor);
                     ctxToBlob(ctx,file,data.quality) 
                 break;
             
                 default:
+                    ctx.drawImage(img, 0, 0,img.width, img.height);
+                    ctxToBlob(ctx,file,data.quality) 
                   // code block
             }
         },
@@ -115,7 +107,6 @@ var ctxToBlob = (ctx,file,quality) => {
         var ImageReader = new FileReader()
         ImageReader.onload = function(){
             var buffer = new Buffer.from(ImageReader.result); 
-            //  file.type.split('/').pop()
             let originalFileName = file.path.split('/').pop();
             let originalFileExt = originalFileName.split('.').pop();
             let originalFilePathAndName = file.path.split('.').shift();
@@ -135,7 +126,7 @@ var ctxToBlob = (ctx,file,quality) => {
         ImageReader.readAsArrayBuffer(blob);
        
         document.getElementById("file").value = "";
-    }, 'image/jpeg', quality *  0.01);  // allow user to set quality
+    }, 'image/jpeg', quality *  0.01);   
 }
 var aspectRatioChange = (e) => {
     type.blur();

@@ -8,8 +8,8 @@ let mainWindow
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 400,
-    height: 500,
+    width: 1080,
+    height: 720,
     webPreferences: {
       nodeIntegration: true
     }
@@ -19,10 +19,10 @@ function createWindow () {
   mainWindow.loadFile('index.html')
   
   // used with electron connect
-  // client.create(mainWindow);
+  //client.create(mainWindow);
   
   // open devtools
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 
