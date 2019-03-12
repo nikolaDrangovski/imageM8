@@ -1,12 +1,22 @@
 'use strict';
-var fs = require('fs');
-const {shell} = require('electron') // deconstructing assignment
+const fs = require('fs');
+const { shell } = require('electron'); // deconstructing assignment
+const { dialog } = require('electron').remote
+const { remote } = require('electron');
+const { app } = remote;
+ 
+
+const basepath = app.getAppPath();
+console.log(basepath)
+
 
 const qualityVal = document.getElementById('quality');
 const qualitySpan = document.getElementById('quality-span');
 const widthField =  document.getElementById('width');
 const heightField =  document.getElementById('height');
 const type =  document.getElementById('type');
+const forcePngField =  document.getElementById('type');
+let folderPath = null;
 // set initial values  
 qualitySpan.innerHTML  = 90;
 qualityVal.value = 90;
@@ -14,13 +24,26 @@ widthField.disabled = true;
 heightField.disabled = true;
 
 document.getElementById("file").addEventListener("change", (event) => {
-    const data = {width:widthField.value,height:heightField.value,type:type.value,quality:qualityVal.value};
+    
+    const data = {
+        width:widthField.value,
+        height:heightField.value,
+        type:type.value,
+        quality:qualityVal.value
+    };
     for(let i in event.target.files){
           comprssImage(event.target.files[i],data);
     }
 }); 
+document.getElementById('chooseStorageFolder').addEventListener('click', _ => {
+    dialog.showOpenDialog({ properties: ['openDirectory','createDirectory'] }, (folder) => {
+         console.log(folder)
+         folderPath = folder[0];
+    })
+  })
 
 document.getElementById("quality").addEventListener("input", (event) => {
+    console.log(folderPath)
     qualitySpan.innerHTML  = event.target.value;
 }); 
 
@@ -30,7 +53,7 @@ var comprssImage = (file,data) => {
     reader.readAsDataURL(file);
     reader.onload = event => {
 
-        const imageName = file.name;
+        
         const img = new Image();
         img.src = event.target.result;
         img.onload = () => {
@@ -49,7 +72,7 @@ var comprssImage = (file,data) => {
                     elem.height = height;
                     ctx = elem.getContext('2d');
                     ctx.drawImage(img, 0, 0, width, height);
-                    ctxToBlob(ctx,imageName,data.quality) 
+                    ctxToBlob(ctx,file,data.quality) 
                 break;
                 case 'custom':
                     width = data.width;
@@ -58,7 +81,7 @@ var comprssImage = (file,data) => {
                     elem.height = height;
                     ctx = elem.getContext('2d');
                     ctx.drawImage(img, 0, 0, width, height);
-                    ctxToBlob(ctx,imageName,data.quality) 
+                    ctxToBlob(ctx,file,data.quality) 
                 break;
                 case 'height':
                     height = data.height;
@@ -67,7 +90,7 @@ var comprssImage = (file,data) => {
                     elem.height = height //img.height * scaleFactor;
                     ctx = elem.getContext('2d');
                     ctx.drawImage(img, 0, 0, img.width * scaleFactor, height);
-                    ctxToBlob(ctx,imageName,data.quality) 
+                    ctxToBlob(ctx,file,data.quality) 
                 break;
                 case 'width':
                     width = data.width;
@@ -76,7 +99,7 @@ var comprssImage = (file,data) => {
                     elem.height =  img.height * scaleFactor;
                     ctx = elem.getContext('2d');
                     ctx.drawImage(img, 0, 0, width, img.height * scaleFactor);
-                    ctxToBlob(ctx,imageName,data.quality) 
+                    ctxToBlob(ctx,file,data.quality) 
                 break;
             
                 default:
@@ -87,21 +110,30 @@ var comprssImage = (file,data) => {
     };
 }
 
-var ctxToBlob = (ctx,imageName,quality) => {
+var ctxToBlob = (ctx,file,quality) => {
     ctx.canvas.toBlob((blob) => {
         var ImageReader = new FileReader()
         ImageReader.onload = function(){
-            var buffer = new Buffer.from(ImageReader.result)
-            fs.writeFile(imageName.split('.').slice(0, -1).join('.')+'.jpg', buffer, {}, (err, res) => {
+            var buffer = new Buffer.from(ImageReader.result); 
+            //  file.type.split('/').pop()
+            let originalFileName = file.path.split('/').pop();
+            let originalFileExt = originalFileName.split('.').pop();
+            let originalFilePathAndName = file.path.split('.').shift()
+            let path =  originalFilePathAndName + "_imagem8" +'.'+ originalFileExt;
+            if(folderPath != null && folderPath +'/'+ file.name != file.path){
+                path = folderPath +'/'+ file.name;
+            }
+            fs.writeFile(path, buffer, {}, (err, res) => {
                 if(err){
-                    console.error(err)
+                   alert(err)
                     return
                 }
-                console.log('saved')
+                alert("saved")
+               // shell.openItem(basepath);
             })
         }
         ImageReader.readAsArrayBuffer(blob);
-        shell.openItem('/Users/burial/Work/imageM8/imageM8');
+       
         document.getElementById("file").value = "";
     }, 'image/jpeg', quality *  0.01);  // allow user to set quality
 }
@@ -149,4 +181,4 @@ var restValues = () =>{
                     console.log(err);
                }); */
 
-           
+    

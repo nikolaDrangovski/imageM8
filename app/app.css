@@ -160,6 +160,7 @@ form {
 }
 .range-label{
   text-align: center;
+  font-family: "Comic Sans MS";
 }
 #quality-value{
   font-size: 20px;
@@ -195,4 +196,28 @@ input:disabled{
   max-width: 288px;
   padding-bottom: 10px;
   margin: 0 auto;
+}
+.info{
+  font-style: italic;
+  font-size: 10px;
+  max-width: 288px;
+  margin: 0 auto;
+  margin-top: 15px;
+  text-align: center;
+}
+.more-container{
+  margin: 0 auto;
+  width: 288px;
+  padding-top: 10px;
+}
+.choose-folder{
+  background: #39D2B4;
+  height: 46px;
+  color: white;
+  border-color: #39D2B4;
+  width: 200px;
+}
+.force-png{
+  font-size: 14px;
+  font-family: "Comic Sans MS";
 }

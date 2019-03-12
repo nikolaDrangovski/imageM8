@@ -7,8 +7,8 @@
     
   </head>
   <body>
-      <script>require('electron-connect').client.create()</script>
-    <div class='logo-container'> <h1>Welcome to <span class='image-logo'>Image</span><span class='m8'>M8</span></h1> </div>
+     <!--   <script>require('electron-connect').client.create()</script>  -->
+    <div class='logo-container'> <h1><span class='image-logo'>Image</span><span class='m8'>M8</span></h1> </div>
     <!--   
     We are using Node.js <script>document.write(process.versions.node)</script>,
     Chromium <script>document.write(process.versions.chrome)</script>,
@@ -22,7 +22,7 @@
      <form action="#">
       <div class="file-container">  
         <input multiple="multiple" class="input-file"  id="file" type="file" accept="image/*"> 
-        <label tabindex="0" for="my-file" class="input-file-trigger">Choose an image</label>
+        <label tabindex="0" for="my-file" class="input-file-trigger">Choose image or images</label>
       </div> 
       <p class="file-return"></p>
       <div class='reg-inputs-container'> 
@@ -49,11 +49,19 @@
     
       
     </form>
-    
- 
-  
-   <!--  <button id='open'>Open</button> -->
+      <p class='info'>By default images will be 
+        saved at the same folder where you will pick them to be resized (this will not overwrite them we just add the _imagem8 extension).
+        If you want to store them at another folder please click choose storage folder.
+      </p>
 
-     <script src="app/app.js"></script>
+    <div class='more-container'> 
+      <button id="chooseStorageFolder" class="choose-folder">Choose save folder...</button>
+      <span class='force-png'> <input id='forcePng' type="checkbox" name="forcePng">Force png</span> 
+    </div>
+    <script src="app/app.js"></script>
+    
+   
+
+
   </body>
 </html>
