@@ -134,7 +134,7 @@ form {
 }
 
 .reg-input:focus + label {
-  left: -20em;
+   opacity: 0;
 }
 
 .reg-inputs-container{
