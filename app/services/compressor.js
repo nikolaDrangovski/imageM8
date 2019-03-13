@@ -1,4 +1,5 @@
 const fs = require('fs');
+
 let imageLoad = (src) => {
   return new Promise((resolve, reject) => {
     const img = new Image()
@@ -76,19 +77,22 @@ exports.compressImageModule = (file,data) => {
 }
 
 async function compressAndWrite(ctx, file,data ) {
-  const force = data.forceJpg;
-  const compressionType = file.type
+  let force = data.forceJpg;
+  let compressionType = file.type
   let path = data.customFolderPath;
   // if force png to jpg
   if(force == true){
     compressionType = 'image/jpeg'
   }
+  console.log(force)
   let compressedFile
   compressedFile = await ctx.canvas.convertToBlob({ type: compressionType, quality});
   compressedFile.name = file.name;
   // check if file is in same directory 
   if(path == null){
-    const fileOriginalExtension = file.name.split('.').pop();
+    let fileOriginalExtension = force == true ? 'jpg' : file.name.split('.').pop()
+   // widthField.disabled == true ? widthField.disabled = false : widthField.disabled = true;
+  //  const fileOriginalExtension = file.name.split('.').pop();
     const fileName = file.name.split('.').slice(0, -1).join('_');
     compressedFile.name = fileName; 
     path = file.path.substr(0, file.path.lastIndexOf('/')) + '/' + fileName + '_image-m8.' + fileOriginalExtension;
@@ -103,6 +107,7 @@ async function compressAndWrite(ctx, file,data ) {
         console.log(err)
         return
       }
+      shell.openItem(path.substring(0, path.lastIndexOf("/") + 1));
     })
   }
   ImageReader.readAsArrayBuffer(compressedFile);

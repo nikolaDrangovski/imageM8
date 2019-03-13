@@ -1,5 +1,4 @@
 'use strict';
-const fs = require('fs');
 const { shell } = require('electron'); // deconstructing assignment
 const { dialog } = require('electron').remote
 const { remote } = require('electron');
@@ -30,9 +29,10 @@ document.getElementById("file").addEventListener("input", (event) => {
         ratioType:ratioType.value,
         quality:qualityVal.value,
         customFolderPath:customFolderPath,
-        forceJpg:forceJpgField.value
+        forceJpg:forceJpgField.checked
     };
     for(let i in event.target.files){
+        console.log(data)
         compressImageModule(event.target.files[i],data)
     }
 }); 
