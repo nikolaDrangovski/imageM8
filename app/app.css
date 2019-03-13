@@ -40,13 +40,13 @@ form {
   padding: 14px 0;
   cursor: pointer;
 }
- .input-file:hover + .input-file-trigger,
- .input-file:focus + .input-file-trigger,
- .input-file-trigger:hover,
- .input-file-trigger:focus {
+ .input-file:hover + .input-file-trigger{
   background: rgb(48, 69, 89);
   color: #39D2B4;
 }
+
+
+  /*
 
 .file-return {
   margin: 0;
@@ -65,7 +65,6 @@ form {
   font-weight: normal;
 }
 
-  /*
   .reg-input{
     width: 245px;
     height: 30px;
@@ -212,6 +211,7 @@ input:disabled{
   padding-top: 10px;
 }
 .choose-folder{
+  transition: all .4s;
   background: #39D2B4;
   height: 46px;
   color: white;
@@ -227,6 +227,9 @@ input:disabled{
 .force-png{
   font-size: 14px;
   font-family: "Comic Sans MS";
+
+}
+#forceJpg{
   cursor: pointer;
 }
 .export-folder{
