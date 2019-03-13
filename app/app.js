@@ -12,8 +12,8 @@ const widthField =  document.getElementById('width');
 const heightField =  document.getElementById('height');
 const exportFolder =  document.getElementById('exportFolder');
 const ratioType =  document.getElementById('ratioType');
-const forcePngField =  document.getElementById('forcePng');
-let folderPath = null;
+const forceJpgField =  document.getElementById('forceJpg');
+let customFolderPath = null;
 // set initial values  
 qualitySpan.innerHTML  = 90;
 qualityVal.value = 90;
@@ -23,20 +23,22 @@ document.getElementById("file").addEventListener("click", () => {
     document.getElementById("file").value = '';
 });
 document.getElementById("file").addEventListener("input", (event) => {
-    console.log(event.target.files)
+ 
     const data = {
         width:widthField.value,
         height:heightField.value,
         ratioType:ratioType.value,
-        quality:qualityVal.value
+        quality:qualityVal.value,
+        customFolderPath:customFolderPath,
+        forceJpg:forceJpgField.value
     };
     for(let i in event.target.files){
-        comprssImage(event.target.files[i],data);
+        compressImageModule(event.target.files[i],data)
     }
 }); 
 document.getElementById('chooseStorageFolder').addEventListener('click', _ => {
     dialog.showOpenDialog({ properties: ['openDirectory','createDirectory'] }, (folder) => {
-        folderPath = folder[0];
+        customFolderPath = folder[0];
         exportFolder.innerHTML = folder[0];
     })
   })
@@ -44,13 +46,6 @@ document.getElementById('chooseStorageFolder').addEventListener('click', _ => {
 document.getElementById("quality").addEventListener("input", (event) => {
     qualitySpan.innerHTML  = event.target.value;
 }); 
-
-var comprssImage = (file,data) => {
-    for(let i in event.target.files){
-        compressImageModule(event.target.files[i],data)
-    }
-}
-
 
 var aspectRatioChange = (e) => {
     ratioType.blur();

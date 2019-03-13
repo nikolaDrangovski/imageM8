@@ -30,19 +30,18 @@
       <p class="file-return"></p>
       <div class='reg-inputs-container'> 
         
-           <select class='reg-select' id='ratioType' onchange="aspectRatioChange(event)" >
+            <select class='reg-select' id='ratioType' onchange="aspectRatioChange(event)" >
               <option value="original">Original</option>
               <option value="custom">Custom</option>
               <option value="height">Height</option>
               <option value="width">Width</option>
             </select>
-            <label class='reg-select-label' for="width">Ratio</label>  
 
-      <!-- <input onchange="aspectRatioChange('width',event)"  class='reg-checkbox-width' id='lockWidth' type="checkbox" /> -->
+      <label class='reg-select-label' for="width">Ratio</label>  
+
       <input id='width'type="number" class='reg-input' name="width" title="width">
       <label for="width">Width - px</label>   
   
-      <!--<input onchange="aspectRatioChange('height')" class='reg-checkbox-height' id='lockHeight' type="checkbox" />--> 
       <input id="height" class='reg-input' name="height" title="height" type="number">
       <label for="height">Height - px</label>   
 
@@ -59,14 +58,10 @@
 
     <div class='more-container'> 
       <button id="chooseStorageFolder" class="choose-folder">Choose save folder...</button>
-      <span class='force-png'> <input id='forcePng' type="checkbox" name="forcePng">Force png</span>
+      <span class='force-png'> <input id='forceJpg' type="checkbox" name="forcePng">Force jpg</span>
       <div class='export-folder' id='exportFolder'></h5> 
     </div>
-  
     <script src="app/app.js"></script>
-
-    <input multiple="multiple" type="file" accept="image/*" onchange="handleFile(event);">
-
   </body>
 </html>
  
