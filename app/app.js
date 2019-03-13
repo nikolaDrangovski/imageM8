@@ -3,14 +3,15 @@ const fs = require('fs');
 const { shell } = require('electron'); // deconstructing assignment
 const { dialog } = require('electron').remote
 const { remote } = require('electron');
- 
 
+var { compressImageModule } = require('./app/services/compressor.js');
 
 const qualityVal = document.getElementById('quality');
 const qualitySpan = document.getElementById('quality-span');
 const widthField =  document.getElementById('width');
 const heightField =  document.getElementById('height');
-const type =  document.getElementById('type');
+const exportFolder =  document.getElementById('exportFolder');
+const ratioType =  document.getElementById('ratioType');
 const forcePngField =  document.getElementById('forcePng');
 let folderPath = null;
 // set initial values  
@@ -18,33 +19,35 @@ qualitySpan.innerHTML  = 90;
 qualityVal.value = 90;
 widthField.disabled = true;
 heightField.disabled = true;
-
-document.getElementById("file").addEventListener("change", (event) => {
-    
+document.getElementById("file").addEventListener("click", () => {
+    document.getElementById("file").value = '';
+});
+document.getElementById("file").addEventListener("input", (event) => {
+    console.log(event.target.files)
     const data = {
         width:widthField.value,
         height:heightField.value,
-        type:type.value,
+        ratioType:ratioType.value,
         quality:qualityVal.value
     };
     for(let i in event.target.files){
-          comprssImage(event.target.files[i],data);
+        comprssImage(event.target.files[i],data);
     }
 }); 
 document.getElementById('chooseStorageFolder').addEventListener('click', _ => {
     dialog.showOpenDialog({ properties: ['openDirectory','createDirectory'] }, (folder) => {
-         folderPath = folder[0];
+        console.log(folder)
+        folderPath = folder[0];
+        exportFolder.innerHTML = folder[0];
     })
   })
 
 document.getElementById("quality").addEventListener("input", (event) => {
-    console.log(forcePngField.checked)
     qualitySpan.innerHTML  = event.target.value;
 }); 
 
 var comprssImage = (file,data) => {
     const reader = new FileReader();
-    console.log(file)
     reader.readAsDataURL(file);
     reader.onload = event => {
 
@@ -57,8 +60,9 @@ var comprssImage = (file,data) => {
             let ctx = elem.getContext('2d');
             let height = img.height;
             let width = img.width;
+            
              
-            switch(data.type) {
+            switch(data.ratioType) {
                 case 'original':
                     width = img.width;
                     height = img.height;
@@ -114,6 +118,7 @@ var ctxToBlob = (ctx,file,quality) => {
             if(folderPath != null && folderPath +'/'+ file.name != file.path){
                 path = folderPath +'/'+ file.name;
             }
+            
             fs.writeFile(path, buffer, {}, (err, res) => {
                 if(err){
                    alert(err)
@@ -124,11 +129,11 @@ var ctxToBlob = (ctx,file,quality) => {
         }
         ImageReader.readAsArrayBuffer(blob);
        
-        document.getElementById("file").value = "";
-    }, 'image/jpeg', quality *  0.01);   
+        
+    }, 'image/png', quality *  0.01);   
 }
 var aspectRatioChange = (e) => {
-    type.blur();
+    ratioType.blur();
     switch(e.target.value) {
         case 'original':
             widthField.disabled = true;
@@ -164,11 +169,17 @@ var restValues = () =>{
     widthField.value = null;
     heightField.value = null;
 }
-  /*
+               /*
                const url = ctx.canvas.toDataURL('image/jpg', 0.8);
                const base64Data = url.replace(/^data:image\/png;base64,/, "");
                fs.writeFile('image.jpg', base64Data, 'base64', function (err) {
                     console.log(err);
                }); */
 
-    
+               async function handleFile(event) {
+                for(let i in event.target.files){
+                    compressImageModule(event.target.files[i])
+                }
+            
+            
+              }

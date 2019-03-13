@@ -64,7 +64,7 @@ form {
   font-style: normal;
   font-weight: normal;
 }
-  
+
   /*
   .reg-input{
     width: 245px;
@@ -96,6 +96,7 @@ form {
   transition: 100ms ease-out all;
   display: block;
   position: relative;
+  cursor: pointer;
 }
 .reg-select:focus{
   border-left: rgb(48, 69, 89)  5em solid
@@ -217,7 +218,19 @@ input:disabled{
   border-color: #39D2B4;
   width: 200px;
 }
+.choose-folder:hover{
+  background: rgb(48, 69, 89);
+  color: #39D2B4;
+  border-color:  rgb(48, 69, 89);
+  cursor: pointer;
+}
 .force-png{
   font-size: 14px;
   font-family: "Comic Sans MS";
+  cursor: pointer;
+}
+.export-folder{
+  font-size: 10px;
+  font-family: "Comic Sans MS";
+  padding-top:5px;
 }

@@ -2,13 +2,14 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>ImageM8</title>
+    <title>Image-M8</title>
     <link href="app/app.css" rel="stylesheet">
-    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.0/dist/browser-image-compression.js"></script>
   </head>
   <body>
+    
      <!--   <script>require('electron-connect').client.create()</script>  -->
-    <div class='logo-container'> <h1><span class='image-logo'>Image</span><span class='m8'>M8</span></h1> </div>
+    <div class='logo-container'> <h1><span class='image-logo'>Image-</span><span class='m8'>M8</span></h1> </div>
     <!--   
     We are using Node.js <script>document.write(process.versions.node)</script>,
     Chromium <script>document.write(process.versions.chrome)</script>,
@@ -19,7 +20,9 @@
       require('./renderer.js')
     </script>
      -->
+     
      <form action="#">
+      
       <div class="file-container">  
         <input multiple="multiple" class="input-file"  id="file" type="file" accept="image/*"> 
         <label tabindex="0" for="my-file" class="input-file-trigger">Choose image or images</label>
@@ -27,7 +30,7 @@
       <p class="file-return"></p>
       <div class='reg-inputs-container'> 
         
-           <select class='reg-select' id='type' onchange="aspectRatioChange(event)" >
+           <select class='reg-select' id='ratioType' onchange="aspectRatioChange(event)" >
               <option value="original">Original</option>
               <option value="custom">Custom</option>
               <option value="height">Height</option>
@@ -44,7 +47,7 @@
       <label for="height">Height - px</label>   
 
     </div>
-     <div class='range-label'>  Quality <span id='quality-span'></span> </div>
+     <div class='range-label'>  Quality <span id='quality-span'></span> % </div>
      <input id="quality" type="range" name="quality" title="quality" min="0" max="100" value="80" class="slider" >
     
       
@@ -56,12 +59,14 @@
 
     <div class='more-container'> 
       <button id="chooseStorageFolder" class="choose-folder">Choose save folder...</button>
-      <span class='force-png'> <input id='forcePng' type="checkbox" name="forcePng">Force png</span> 
+      <span class='force-png'> <input id='forcePng' type="checkbox" name="forcePng">Force png</span>
+      <div class='export-folder' id='exportFolder'></h5> 
     </div>
+  
     <script src="app/app.js"></script>
-    
-   
 
+    <input multiple="multiple" type="file" accept="image/*" onchange="handleFile(event);">
 
   </body>
 </html>
+ 
