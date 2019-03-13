@@ -72,7 +72,7 @@ exports.compressImageModule = (file,data) => {
         // code block
       }
       reader.onerror = error => alert(error);
-    })
+    }, (err) => { console.log(err)})
   }
 }
 

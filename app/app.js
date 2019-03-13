@@ -32,7 +32,6 @@ document.getElementById("file").addEventListener("input", (event) => {
         forceJpg:forceJpgField.checked
     };
     for(let i in event.target.files){
-        console.log(data)
         compressImageModule(event.target.files[i],data)
     }
 }); 
