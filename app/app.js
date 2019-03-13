@@ -36,7 +36,6 @@ document.getElementById("file").addEventListener("input", (event) => {
 }); 
 document.getElementById('chooseStorageFolder').addEventListener('click', _ => {
     dialog.showOpenDialog({ properties: ['openDirectory','createDirectory'] }, (folder) => {
-        console.log(folder)
         folderPath = folder[0];
         exportFolder.innerHTML = folder[0];
     })
@@ -47,91 +46,12 @@ document.getElementById("quality").addEventListener("input", (event) => {
 }); 
 
 var comprssImage = (file,data) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = event => {
-
-        
-        const img = new Image();
-        img.src = event.target.result;
-        img.onload = () => {
-            const elem = document.createElement('canvas');
-            let scaleFactor = 1;
-            let ctx = elem.getContext('2d');
-            let height = img.height;
-            let width = img.width;
-            
-             
-            switch(data.ratioType) {
-                case 'original':
-                    width = img.width;
-                    height = img.height;
-                    elem.width = width;
-                    elem.height = height;
-                    ctx.drawImage(img, 0, 0, width, height);
-                    ctxToBlob(ctx,file,data.quality) 
-                break;
-                case 'custom':
-                    width = data.width;
-                    height = data.height;
-                    elem.width = width;
-                    elem.height = height;
-                    ctx.drawImage(img, 0, 0, width, height);
-                    ctxToBlob(ctx,file,data.quality) 
-                break;
-                case 'height':
-                    height = data.height;
-                    scaleFactor = height / img.height;
-                    elem.width = img.width * scaleFactor;
-                    elem.height = height
-                    ctx.drawImage(img, 0, 0, img.width * scaleFactor, height);
-                    ctxToBlob(ctx,file,data.quality) 
-                break;
-                case 'width':
-                    width = data.width;
-                    scaleFactor = width / img.width;
-                    elem.width = width
-                    elem.height =  img.height * scaleFactor;
-                    ctx.drawImage(img, 0, 0, width, img.height * scaleFactor);
-                    ctxToBlob(ctx,file,data.quality) 
-                break;
-            
-                default:
-                    ctx.drawImage(img, 0, 0,img.width, img.height);
-                    ctxToBlob(ctx,file,data.quality) 
-                  // code block
-            }
-        },
-            reader.onerror = error => alert(error);
-    };
+    for(let i in event.target.files){
+        compressImageModule(event.target.files[i],data)
+    }
 }
 
-var ctxToBlob = (ctx,file,quality) => {
-    ctx.canvas.toBlob((blob) => {
-        var ImageReader = new FileReader()
-        ImageReader.onload = function(){
-            var buffer = new Buffer.from(ImageReader.result); 
-            let originalFileName = file.path.split('/').pop();
-            let originalFileExt = originalFileName.split('.').pop();
-            let originalFilePathAndName = file.path.split('.').shift();
-            let path =  originalFilePathAndName + "_imagem8" +'.'+ originalFileExt;
-            if(folderPath != null && folderPath +'/'+ file.name != file.path){
-                path = folderPath +'/'+ file.name;
-            }
-            
-            fs.writeFile(path, buffer, {}, (err, res) => {
-                if(err){
-                   alert(err)
-                    return
-                }
-              shell.openItem(path.substring(0, path.lastIndexOf("/") + 1));
-            })
-        }
-        ImageReader.readAsArrayBuffer(blob);
-       
-        
-    }, 'image/png', quality *  0.01);   
-}
+
 var aspectRatioChange = (e) => {
     ratioType.blur();
     switch(e.target.value) {
@@ -174,12 +94,31 @@ var restValues = () =>{
                const base64Data = url.replace(/^data:image\/png;base64,/, "");
                fs.writeFile('image.jpg', base64Data, 'base64', function (err) {
                     console.log(err);
-               }); */
-
-               async function handleFile(event) {
-                for(let i in event.target.files){
-                    compressImageModule(event.target.files[i])
+               }); 
+                 var ctxToBlob = (ctx,file,quality) => {
+                 ctx.canvas.toBlob((blob) => {
+                 var ImageReader = new FileReader()
+            ImageReader.onload = function(){
+            var buffer = new Buffer.from(ImageReader.result); 
+            let originalFileName = file.path.split('/').pop();
+            let originalFileExt = originalFileName.split('.').pop();
+            let originalFilePathAndName = file.path.split('.').shift();
+            let path =  originalFilePathAndName + "_imagem8" +'.'+ originalFileExt;
+            if(folderPath != null && folderPath +'/'+ file.name != file.path){
+                path = folderPath +'/'+ file.name;
+            }
+            
+            fs.writeFile(path, buffer, {}, (err, res) => {
+                if(err){
+                   alert(err)
+                    return
                 }
-            
-            
-              }
+              shell.openItem(path.substring(0, path.lastIndexOf("/") + 1));
+            })
+        }
+        ImageReader.readAsArrayBuffer(blob);
+       
+        
+    }, 'image/png', quality *  0.01);   
+}
+*/
