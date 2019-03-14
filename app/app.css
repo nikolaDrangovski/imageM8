@@ -84,6 +84,7 @@ form {
   transition: 100ms ease-out all;
   display: block;
   position: relative;
+  padding-left: 5px;
 }
 
 .reg-select{
