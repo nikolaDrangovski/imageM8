@@ -1,5 +1,6 @@
 const fs = require('fs');
-
+const os = require('os');
+const platform = os.platform();
 let imageLoad = (src) => {
   return new Promise((resolve, reject) => {
     const img = new Image()
@@ -84,20 +85,23 @@ async function compressAndWrite(ctx, file,data ) {
   if(force == true){
     compressionType = 'image/jpeg'
   }
-  console.log(force)
   let compressedFile
   compressedFile = await ctx.canvas.convertToBlob({ type: compressionType, quality});
   compressedFile.name = file.name;
   // check if file is in same directory 
   if(path == null){
-    let fileOriginalExtension = force == true ? 'jpg' : file.name.split('.').pop()
-   // widthField.disabled == true ? widthField.disabled = false : widthField.disabled = true;
-  //  const fileOriginalExtension = file.name.split('.').pop();
+    // chek if we are dealing with windows
+    if(platform == 'win32'){  
+      file.path = file.path.replace(/^\*[\\\/]/, '\\');
+    }
+    let fileOriginalExtension = force == true ? 'jpg' : file.name.split('.').pop();
+    
     const fileName = file.name.split('.').slice(0, -1).join('_');
     compressedFile.name = fileName; 
-    path = file.path.substr(0, file.path.lastIndexOf('/')) + '/' + fileName + '_image-m8.' + fileOriginalExtension;
+    path = platform == 'win32' ? file.path.substr(0, file.path.lastIndexOf('\\')) + '\\' + fileName + '_image-m8.' + fileOriginalExtension : file.path.substr(0, file.path.lastIndexOf('/')) + '/' + fileName + '_image-m8.' + fileOriginalExtension;
   }else {
-    path += "/" + file.name
+    // if windwos change forward to backslash
+    path = platform == 'win32' ? path + '\\' +  file.name : path + '/' +  file.name;
   }
   var ImageReader = new FileReader();
   ImageReader.onload = function () {
@@ -111,56 +115,5 @@ async function compressAndWrite(ctx, file,data ) {
     })
   }
   ImageReader.readAsArrayBuffer(compressedFile);
-
-  
-  //  const url = ctx.canvas.toDataURL('image/png', 0.8);
-
-  /*
-  var urlCreator = window.URL || window.webkitURL;
-  var imageUrl = urlCreator.createObjectURL(compressedFile);
-
-
-    const base64Data = imageUrl.replace(/^data:image\/png;base64,/, "");
-               fs.writeFile('image.png', base64Data, 'base64', function (err) {
-                    console.log(err);
-               });
-
-
-  fs.writeFile('/Users/burial/Downloads/imasdasdasdasdas.png', data, {}, (err, res) => {
-    if(err){
-       console.log(err)
-        return
-    }
-})
- return compressedFile
-*/
- /*
-exports.getBase64 = (file) => {
-  let readers = new FileReader();
-  readers.readAsDataURL(file);
-  readers.onload = event => {
-    imageLoad(event.target.result).then(res => {
-      console.log("loaded async image")
-      console.log(res)
-    })
-
-    //   var base64Data = event.target.result.replace(/^data:image\/png;base64,/, "");
-    //    console.log(base64Data)
-  }
-}
-*/
-
-  /*
-  let compressedFile
-  if (typeof OffscreenCanvas === 'function' && canvas instanceof OffscreenCanvas) {
-    compressedFile = await canvas.convertToBlob({ type: fileType, quality })
-    compressedFile.name = fileName
-    compressedFile.lastModified = fileLastModified
-  } else {
-    const dataUrl = canvas.toDataURL(fileType, quality)
-    compressedFile = await getFilefromDataUrl(dataUrl, fileName, fileLastModified)
-  }
-  return compressedFile
-  */
 }
 
