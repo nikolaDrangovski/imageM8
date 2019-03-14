@@ -76,26 +76,36 @@ form {
  
  .reg-input {
   height: 3em;
-  width: 18em;
+  width: 196px;
   border: none;
-  border-left:  #39D2B4 solid 8em;
+  border-left:  #39D2B4 solid 90px;
   background:white;
   color: #111;
   transition: 100ms ease-out all;
   display: block;
   position: relative;
 }
+
 .reg-select{
   height: 3em;
-  width: 26em;
+  width: 288px;
   border: none;
-  border-left:  #39D2B4 solid 8em;
+  border-left:  #39D2B4 solid 90px;
   background:white;
   color: #111;
   transition: 100ms ease-out all;
   display: block;
   position: relative;
   cursor: pointer;
+
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+  background-image: url("../assets/helpers/arrow.png");
+  background-position: 95% 50%;
+  background-repeat: no-repeat;
+  background-size: 15px;
+  padding:5px;
+
 }
 .reg-select:focus{
   border-left: rgb(48, 69, 89)  5em solid
