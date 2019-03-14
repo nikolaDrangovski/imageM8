@@ -43,30 +43,47 @@ exports.compressImageModule = (file,data) => {
           compressAndWrite(ctx, file,data)
           break;
         case 'custom':
-          width = data.width;
-          height = data.height;
-          elem.width = width;
-          elem.height = height;
-          ctx.drawImage(img, 0, 0, width, height);
-          compressAndWrite(ctx, file,data)
+          if(data.width != '' && data.height  != ''){
+            width = data.width;
+            height = data.height;
+            elem.width = width;
+            elem.height = height;
+            ctx.drawImage(img, 0, 0, width, height);
+            compressAndWrite(ctx, file,data)
+          }else {
+             new Notification('Missing values', {
+              body: 'Please enter width and height'
+            });
+          }
           break;
         case 'height':
-          height = data.height;
-          scaleFactor = height / img.height;
-          elem.width = img.width * scaleFactor;
-          elem.height = height
-          ctx.drawImage(img, 0, 0, img.width * scaleFactor, height);
-          compressAndWrite(ctx, file,data)
+          if(data.height  != ''){
+            height = data.height;
+            scaleFactor = height / img.height;
+            elem.width = img.width * scaleFactor;
+            elem.height = height
+            ctx.drawImage(img, 0, 0, img.width * scaleFactor, height);
+            compressAndWrite(ctx, file,data)
+          }else {
+            new Notification('Missing values', {
+              body: 'Please enter height'
+            });
+        }
           break;
         case 'width':
-          width = data.width;
-          scaleFactor = width / img.width;
-          elem.width = width
-          elem.height = img.height * scaleFactor;
-          ctx.drawImage(img, 0, 0, width, img.height * scaleFactor);
-          compressAndWrite(ctx, file,data)
+          if(data.width  != ''){
+            width = data.width;
+            scaleFactor = width / img.width;
+            elem.width = width
+            elem.height = img.height * scaleFactor;
+            ctx.drawImage(img, 0, 0, width, img.height * scaleFactor);
+            compressAndWrite(ctx, file,data)
+          }else {
+            new Notification('Missing values', {
+              body: 'Please enter width'
+            });
+        }
           break;
-
         default:
           ctx.drawImage(img, 0, 0, img.width, img.height);
           compressAndWrite(ctx, file,data)
