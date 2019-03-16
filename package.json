@@ -1,21 +1,24 @@
 {
-  "name": "electron-quick-start",
-  "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "name": "image-M8",
+  "version": "0.0.1",
+  "description": "Simple tool for resizing and compressing images",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "make-icon": "./node_modules/.bin/electron-icon-maker --input=logo.png --output=./project_icons",
-    "build": "electron-packager . imageM8 --ignore=node_modules/electron-* && cp ./project_icons/icons/mac/icon.icns imageM8-darwin-x64/imageM8.app/Contents/Resources/electron.icns",
-    "package": "asar pack imageM8-darwin-x64/imageM8.app/Contents/Resources/app imageM8-darwin-x64/imageM8.app/Contents/Resources/app.asar"
+    "build-mac": "electron-packager . imageM8 --overwrite --ignore=node_modules/electron-* && cp ./project_icons/icons/mac/icon.icns imageM8-darwin-x64/imageM8.app/Contents/Resources/electron.icns",
+    "build-windows": "electron-packager . imageM8 --platform=win32  --arch=x64 --overwrite",
+    "asar-package-mac": "asar pack imageM8-darwin-x64/imageM8.app/Contents/Resources/app imageM8-darwin-x64/imageM8.app/Contents/Resources/app.asar",
+    "asar-package-win": "asar pack imageM8-win32-x64/resources/app imageM8-win32-x64/resources/app.asar"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/nikolaDrangovski/imageM8",
   "keywords": [
     "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "tool",
+    "resize",
+    "image",
+    "compress",
+    "easy"
   ],
   "author": "GitHub",
   "license": "CC0-1.0",

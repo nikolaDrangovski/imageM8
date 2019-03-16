@@ -4,3 +4,5 @@ node_modules
 *.png
 *.gif
 imageM8-darwin-x64
+imageM8-win32-x64
+make-dmg.js
