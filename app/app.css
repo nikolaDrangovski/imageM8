@@ -1,7 +1,7 @@
 body {
   font-family: "Open sans", "Segoe UI", "Segoe WP", Helvetica, Arial, sans-serif;
   color: rgb(131, 144, 157);
-  background: rgb(240, 244, 244);
+  background: white
   }
 h1, h2 {
   margin-bottom: 5px;
@@ -11,7 +11,7 @@ h1, h2 {
 }
 h2 {
   margin: 5px 0 2em;
-  color: #1ABC9C;
+  color: #39D2B4;
 }
 form {
   width: 288px;
@@ -73,7 +73,9 @@ form {
     text-align: center;
     font-family: "Open sans"
  } */
- 
+ .add-shaddow{
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+ }
  .reg-input {
   height: 3em;
   width: 196px;
@@ -247,4 +249,7 @@ input:disabled{
   font-size: 10px;
   font-family: "Comic Sans MS";
   padding-top:5px;
+}
+.beta{
+  font-size: 15px;
 }

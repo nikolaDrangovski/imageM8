@@ -4,7 +4,10 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "make-icon": "./node_modules/.bin/electron-icon-maker --input=logo.png --output=./project_icons",
+    "build": "electron-packager . imageM8 --ignore=node_modules/electron-* && cp ./project_icons/icons/mac/icon.icns imageM8-darwin-x64/imageM8.app/Contents/Resources/electron.icns",
+    "package": "asar pack imageM8-darwin-x64/imageM8.app/Contents/Resources/app imageM8-darwin-x64/imageM8.app/Contents/Resources/app.asar"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -17,8 +20,10 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
+    "asar": "^1.0.0",
     "electron": "^4.0.7",
     "electron-connect": "^0.6.3",
+    "electron-icon-maker": "0.0.4",
     "gulp": "^4.0.0"
   },
   "dependencies": {}

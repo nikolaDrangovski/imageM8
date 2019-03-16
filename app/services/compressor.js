@@ -125,10 +125,14 @@ async function compressAndWrite(ctx, file,data ) {
     var buffer = new Buffer.from(ImageReader.result);
     fs.writeFile(path, buffer, {}, (err, res) => {
       if (err) {
-        console.log(err)
+       alert(err)
         return
       }
-      shell.openItem(path.substring(0, path.lastIndexOf("/") + 1));
+      
+      /* new Notification('Compression done', {
+        body: path
+      }); */
+ 
     })
   }
   ImageReader.readAsArrayBuffer(compressedFile);

@@ -11,8 +11,8 @@ let mainWindow
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1080,
-    height: 720,
+    width: 450,
+    height: 550,
     webPreferences: {
       nodeIntegration: true
     }
@@ -27,7 +27,7 @@ function createWindow () {
   // open devtools
   // mainWindow.webContents.openDevTools()
   // Open the DevTools.
-   mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {

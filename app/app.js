@@ -83,6 +83,9 @@ var restValues = () =>{
     widthField.value = null;
     heightField.value = null;
 }
+var openWeb = () => {
+    window.open('https://image-m8.com', '_blank', 'nodeIntegration=no')
+}
                /*
                const url = ctx.canvas.toDataURL('image/jpg', 0.8);
                const base64Data = url.replace(/^data:image\/png;base64,/, "");
