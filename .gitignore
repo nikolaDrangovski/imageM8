@@ -9,3 +9,6 @@ make-dmg.js
 project_icons
 dmg-installer.js
 dmg_installer
+zip_it.js
+dist.zip
+release-builds

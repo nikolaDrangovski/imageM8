@@ -6,10 +6,10 @@
   "scripts": {
     "start": "electron .",
     "make-icon": "./node_modules/.bin/electron-icon-maker --input=logo.png --output=./project_icons",
-    "build-mac": "electron-packager . image-M8 --overwrite --ignore=node_modules/electron-* && cp ./project_icons/icons/mac/icon.icns image-M8-darwin-x64/image-M8.app/Contents/Resources/electron.icns",
-    "build-windows": "electron-packager . imageM8 --platform=win32  --arch=x64 --overwrite",
-    "asar-package-mac": "asar pack image-M8-darwin-x64/image-M8.app/Contents/Resources/app image-M8-darwin-x64/image-M8.app/Contents/Resources/app.asar",
-    "asar-package-win": "asar pack image-M8-darwin-x64/resources/app imageM8-win32-x64/resources/app.asar"
+    "build-mac": "electron-packager . image-M8 --platform=darwin --arch=x64 --icon=project_icons/icons/mac/icon.icns     --asar=true --out=release-builds --overwrite --ignore=node_modules/electron-*",
+    "build-win": "electron-packager . image-M8 --platform=win32  --arch=x64 --icon=project_icons/icons/win/icon.ico      --asar=true --out=release-builds --overwrite --ignore=node_modules/electron-*",
+    "build-lin": "electron-packager . image-M8 --platform=linux  --arch=x64 --icon=project_icons/icons/png/1024x1024.png --asar=true --out=release-builds --overwrite --ignore=node_modules/electron-*",
+    "build-all": "npm run build-mac && npm run build-win && npm run build-lin"
   },
   "repository": "https://github.com/nikolaDrangovski/imageM8",
   "keywords": [
@@ -28,6 +28,7 @@
     "electron-connect": "^0.6.3",
     "electron-icon-maker": "0.0.4",
     "electron-installer-dmg": "^2.0.0",
+    "electron-packager": "^13.1.1",
     "gulp": "^4.0.0"
   },
   "dependencies": {}
