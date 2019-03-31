@@ -1,6 +1,10 @@
+<div style="text-align:center">
+<p>image-M8</p>
+<img style='border:1px solid black' src="screen.png" height="200" title="screenshot"/>
+</div>
 
 # What is it ?
-<img src="screen.png" width="300" title="screenshot"/>
+
  **Image-M8** is a **cross**-**platform** tool to help with image compression and image resizing. It is built with  **Electron** and **Vanila JavaScript** it does't use any third party library's or frameworks except of course **Electron**.
  
  Website:[chek out here](https://image-m8.com)
