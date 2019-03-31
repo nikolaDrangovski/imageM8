@@ -1,6 +1,7 @@
-<div style="text-align:center">
-<p>image-M8</p>
-<img style='border:1px solid black' src="screen.png" height="200" title="screenshot"/>
+<div style="text-align:center" >
+<p align="center">image-M8</p>
+<p><img style='border:1px solid black' src="screen.png" height="300" title="screenshot"/> </p>
+
 </div>
 
 # What is it ?
