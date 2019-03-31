@@ -7,6 +7,7 @@
  **Image-M8** is a **cross**-**platform** tool to help with image compression and image resizing. It is built with  **Electron** and **Vanila JavaScript** it doesn't use any third party library's or frameworks except of course **Electron**.
  
  Website:[chek out here](https://image-m8.com)
+ 
  [Download for Android](https://play.google.com/store/apps/details?id=com.image_m8.www)
  
 # Usage
