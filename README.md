@@ -1,3 +1,4 @@
+[alt text](screen.png "Screen")
 # What is it ?
 
  **Image-M8** is a **cross**-**platform** tool to help with image compression and image resizing. It is built with  **Electron** and **Vanila JavaScript** it does't use any third party library's or frameworks except of course **Electron**.
