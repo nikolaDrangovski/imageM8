@@ -1,4 +1,3 @@
-'use strict';
 const { shell } = require('electron'); // deconstructing assignment
 const { dialog } = require('electron').remote
 const { remote } = require('electron');
@@ -54,12 +53,12 @@ var aspectRatioChange = (e) => {
             heightField.disabled = true;
             restValues();
         break;
-        case 'custom':
+        /* case 'custom':
             widthField.disabled = false;
             heightField.disabled = false;
             restValues();
         
-        break;
+        break; */
         case 'height':
             widthField.disabled = true;
             heightField.disabled = false;

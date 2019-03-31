@@ -1,6 +1,6 @@
 {
   "name": "image-M8",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Simple tool for resizing and compressing images",
   "main": "main.js",
   "scripts": {
