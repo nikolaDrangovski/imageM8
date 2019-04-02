@@ -1,4 +1,4 @@
-const { shell } = require('electron'); // deconstructing assignment
+const { shell } = require('electron');
 const { dialog } = require('electron').remote
 const { remote } = require('electron');
 

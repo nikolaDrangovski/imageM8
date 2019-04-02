@@ -20,7 +20,7 @@ exports.compressImageModule = (file,data) => {
   // maybe chek if file is image ? before continue
   reader.onload = event => {
     imageLoad(event.target.result).then(img => {
-      
+    
       const elem = new OffscreenCanvas(10, 10);
       let scaleFactor = 1;
       let ctx = elem.getContext("2d");
@@ -32,10 +32,15 @@ exports.compressImageModule = (file,data) => {
           width = img.width;
           height = img.height;
           
-          if(file.type = 'image/png'){
+          if(file.type = 'image/png' && data.forceJpg == false ){
             width = img.width *= quality ;
             height = img.height *= quality;
           }
+          if(file.type = 'image/png' && data.forceJpg == true ){
+            width = img.width;
+            height = img.height;
+          }
+     
           elem.width = width;
           elem.height = height;
           ctx.drawImage(img, 0, 0, width, height);
@@ -95,32 +100,41 @@ exports.compressImageModule = (file,data) => {
 }
 
 async function compressAndWrite(ctx, file,data ) {
-  console.log(data)
+ 
   let force = data.forceJpg;
   let compressionType = file.type
   let path = data.customFolderPath;
+  let qualityChosen = data.quality * 0.01;
   // if force png to jpg
   if(force == true){
     compressionType = 'image/jpeg'
   }
-  let compressedFile
-  compressedFile = await ctx.canvas.convertToBlob({ type: compressionType, quality});
+ 
+  
+  let compressedFile;
+  compressedFile = await ctx.canvas.convertToBlob({ type: compressionType, quality:qualityChosen});
   compressedFile.name = file.name;
   let fileName = file.name.split('.').slice(0, -1).join('_');
   let fileOriginalExtension = force == true ? 'jpg' : file.name.split('.').pop();
   // check if file is in same directory 
+   
   if(path == null){
+    // if no path is specified
     // chek if we are dealing with windows
     if(platform == 'win32'){  
       file.path = file.path.replace(/^\*[\\\/]/, '\\');
     }
-     
-    
-    
     compressedFile.name = fileName; 
     path = platform == 'win32' ? file.path.substr(0, file.path.lastIndexOf('\\')) + '\\' + fileName + '_image-m8.' + fileOriginalExtension : file.path.substr(0, file.path.lastIndexOf('/')) + '/' + fileName + '_image-m8.' + fileOriginalExtension;
-  }else {
-    
+  } else if(file.path.substr(0, file.path.lastIndexOf('/')) == path){
+    // if path is same as chosen path
+    if(platform == 'win32'){  
+      file.path = file.path.replace(/^\*[\\\/]/, '\\');
+    }
+    compressedFile.name = fileName; 
+    path = platform == 'win32' ? file.path.substr(0, file.path.lastIndexOf('\\')) + '\\' + fileName + '_image-m8.' + fileOriginalExtension : file.path.substr(0, file.path.lastIndexOf('/')) + '/' + fileName + '_image-m8.' + fileOriginalExtension;
+  } else {
+    // if we have path and it's not the same as chosen path
     // if windwos change forward to backslash
     path = platform == 'win32' ? path + '\\' +  fileName + '.' + fileOriginalExtension : path + '/' + fileName + '.' + fileOriginalExtension;
   }

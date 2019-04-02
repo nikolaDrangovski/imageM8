@@ -30,3 +30,5 @@ There is a small script that watches for your changes and restarts the app
 
 ## Contribute
 New features, bug fixes and improvements are welcome! For questions and suggestions use the  [issues](https://github.com/nikolaDrangovski/imageM8/issues)
+
+
